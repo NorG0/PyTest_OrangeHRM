@@ -8,16 +8,18 @@ logger = logging.getLogger(__name__)
 def log_step(func):
     @functools.wraps(func)
     def wrapper(*args,**kwargs):
-        print(f"start step: {func.__name__}")
-        func(*args,**kwargs)
-        print(f"end step: {func.__name__}")
+        logger.info(f"Starting: {func.__name__}")
+        result = func(*args,**kwargs)
+        logger.info(f"Ending: {func.__name__}")
+        return result
     return wrapper
+
 
 def handle_exception(func):
     @functools.wraps(func)
     def wrapper(*args,**kwargs):
         try:
-            func(*args,**kwargs)
+            return func(*args,**kwargs)
         except TimeoutException:
             logger.error(f"Timeout occurred while executing {func.__name__}")
             raise

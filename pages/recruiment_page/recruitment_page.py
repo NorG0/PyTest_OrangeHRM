@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
+from pages.recruiment_page.vacancies_page import Vacancies
 
 
 class Recruitment(BasePage):
@@ -15,7 +16,7 @@ class Recruitment(BasePage):
 
     def click_on_vacancies(self):
         self.find_clickable_element(self.VACANCIES_TAB).click()
-
+        return Vacancies(self.driver)
 
     def select_dropdown_option(self, locator,option_text):
         super().click_dropdown(locator)

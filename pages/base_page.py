@@ -19,7 +19,6 @@ class BasePage:
         else:
             raise Exception("URL is not defined")
 
-    @handle_exception
     def find_element(self, locator):
         return self.wait.until(EC.presence_of_element_located(locator))
 
@@ -35,7 +34,6 @@ class BasePage:
         except TimeoutException:
             return False
 
-    @handle_exception
     def click_dropdown(self, locator):
         self.find_element(locator).click()
         return self

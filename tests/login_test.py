@@ -1,6 +1,7 @@
 import unittest
 
 from pages.login_page import LoginPage
+from utils.decorator import log_step
 
 
 class TestLogin(unittest.TestCase):
@@ -19,6 +20,7 @@ class TestLogin(unittest.TestCase):
     def setUp(self):
         self.login_page.openurl()
 
+    @log_step
     def test_login_valid(self):
         dashboard_page = self.login_page.login("Admin", "admin123")
         self.assertTrue(dashboard_page.is_dashboard_page_loaded(),"No Dashboard Page Found")
@@ -26,13 +28,15 @@ class TestLogin(unittest.TestCase):
         login_page = dashboard_page.dashboard_signout()
         self.assertTrue(login_page.is_login_page_loaded(),"No Login Page Found")
 
-
+    @log_step
     def test_login_invalid(self):
         self.login_page.login("Admin", "admin1234")
         #Check error msg
         self.assertTrue(self.login_page.is_error_msg_displayed(),"Error msg not displayed")
         self.assertEqual(self.login_page.get_error_msg(),"Invalid credentials")
 
+
+    @log_step
     def test_login_empty(self):
         self.login_page.login(username="",password="")
         #Check input error msg

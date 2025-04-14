@@ -19,15 +19,17 @@ class TestRecruitment(unittest.TestCase):
     def setUp(self):
         from pages.login_page import LoginPage
         self.dashboard_page.openurl()
-        self.LoginPage = LoginPage(self.driver)
-        self.LoginPage.login("Admin", "admin123").is_dashboard_page_loaded()
+        self.loginPage = LoginPage(self.driver)
+        self.loginPage.login("Admin", "admin123").is_dashboard_page_loaded()
 
     def test_click_recruitment(self):
-        recruitment_page = self.dashboard_page.click_menu_item("Recruitments")
+        recruitment_page = self.dashboard_page.click_menu_item("Recruitment")
         self.assertTrue(recruitment_page.is_recruitment_page_loaded(),"No Recruitment Page Found")
 
 
 
+if __name__ == "__main__":
+    unittest.main()
 
 
 

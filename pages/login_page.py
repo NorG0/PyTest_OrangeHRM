@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
 from pages.dashboard_page import DashboardPage
-from utils.decorator import  handle_exception
+from utils.decorator import handle_exception, log_step
 
 
 class LoginPage(BasePage):
@@ -28,20 +28,21 @@ class LoginPage(BasePage):
         self.click_login()
         return DashboardPage(self.driver)
 
+    @log_step
     def enter_username(self, username):
         us_filed = self.driver.find_element(*self.USERNAME_INPUT)
         us_filed.clear()
         us_filed.send_keys(username)
         return self
 
-
+    @log_step
     def enter_password(self, password):
         pw_field = self.driver.find_element(*self.PASSWORD_INPUT)
         pw_field.clear()
         pw_field.send_keys(password)
         return self
 
-
+    @log_step
     def click_login(self):
         self.find_clickable_element(self.LOGIN_BUTTON).click()
         return self
